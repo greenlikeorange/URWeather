@@ -5,7 +5,8 @@ import {
   View,
   StatusBar,
   ImageBackground,
-  ActivityIndicator
+  ActivityIndicator,
+  NativeModules
 } from 'react-native';
 import Rabbit from 'rabbit-node';
 import moment from 'moment/min/moment-with-locales';
@@ -23,7 +24,14 @@ export default class App extends Component {
       weather: 'Default',
       currentCity: null,
       message: null,
+      isUnicode: undefined
     };
+  }
+
+  componentWillMount() {
+    NativeModules.FontDetector.isUnicode((isUnicode) => {
+      this.setState({ isUnicode });
+    });
   }
 
   componentDidMount() {
@@ -67,11 +75,12 @@ export default class App extends Component {
       });
       console.log(error);
     }
-  }
+  } 
 
   render() {
     const temp = this.state.temp;
     const weather = this.state.weather;
+    const isUnicode = this.state.isUnicode;
 
     if(weather === 'Default') {
       return(

@@ -1,6 +1,7 @@
 package com.urweather;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.facebook.react.ReactApplication;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -10,6 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import me.myatminsoe.mdetect.MDetect;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new SplashScreenReactPackage(),
             new LinearGradientPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new ReactPackages()
       );
     }
 
@@ -46,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    MDetect.INSTANCE.init(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
